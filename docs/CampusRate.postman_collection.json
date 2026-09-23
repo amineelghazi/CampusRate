@@ -1,0 +1,358 @@
+{
+  "info": {
+    "_postman_id": "9415d09d-4a4b-45e2-bb52-d750bafb8213",
+    "name": "CampusRate",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "52516954",
+    "_collection_link": "https://go.postman.co/collection/52516954-9415d09d-4a4b-45e2-bb52-d750bafb8213?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "http://localhost:3000/api/v1/places",
+      "protocolProfileBehavior": {
+        "disableCookies": false,
+        "followRedirects": true,
+        "maxResponseSize": 52428800,
+        "strictSSL": false
+      },
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"Library\",\r\n  \"description\": \"A place to study and read books\",\r\n  \"category\": \"LIBRARY\",\r\n  \"address\": \"123 Main Street\",\r\n  \"services\": [\r\n    \"Wi-Fi\",\r\n    \"Parking\"\r\n  ],\r\n  \"status\": \"ACTIVE\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/v1/places",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "v1",
+            "places"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:3000/api/v1/places",
+      "protocolProfileBehavior": {
+        "disableCookies": false,
+        "followRedirects": true,
+        "maxResponseSize": 52428800,
+        "strictSSL": false
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"Library\",\r\n  \"description\": \"A place to study and read books\",\r\n  \"category\": \"LIBRARY\",\r\n  \"address\": \"123 Main Street\",\r\n  \"services\": [\r\n    \"Wi-Fi\",\r\n    \"Parking\"\r\n  ],\r\n  \"status\": \"ACTIVE\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/v1/places?category=LIBRARY&page=1&limit=10",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "v1",
+            "places"
+          ],
+          "query": [
+            {
+              "key": "category",
+              "value": "LIBRARY"
+            },
+            {
+              "key": "page",
+              "value": "1"
+            },
+            {
+              "key": "limit",
+              "value": "10"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:3000/api/v1/places/plc_5816b676-122b-41d0-8ece-629dfb5178b0",
+      "protocolProfileBehavior": {
+        "disableCookies": false,
+        "followRedirects": true,
+        "maxResponseSize": 52428800,
+        "strictSSL": false
+      },
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"Library\",\r\n  \"description\": \"A place to study and read books\",\r\n  \"category\": \"LIBRARY\",\r\n  \"address\": \"123 Main Street\",\r\n  \"services\": [\r\n    \"Wi-Fi\",\r\n    \"Parking\"\r\n  ],\r\n  \"status\": \"ACTIVE\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/v1/places/plc_5816b676-122b-41d0-8ece-629dfb5178b0",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "v1",
+            "places",
+            "plc_5816b676-122b-41d0-8ece-629dfb5178b0"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:3000/api/v1/places/plc_5816b676-122b-41d0-8ece-629dfb5178b0",
+      "protocolProfileBehavior": {
+        "disableCookies": false,
+        "followRedirects": true,
+        "maxResponseSize": 52428800,
+        "strictSSL": false
+      },
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"Library\",\r\n  \"description\": \"A place to study and read books\",\r\n  \"category\": \"LIBRARY\",\r\n  \"address\": \"123 Main Street\",\r\n  \"services\": [\r\n    \"Wi-Fi\",\r\n    \"Parking\"\r\n  ],\r\n  \"status\": \"ACTIVE\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/v1/places/plc_5816b676-122b-41d0-8ece-629dfb5178b0",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "v1",
+            "places",
+            "plc_5816b676-122b-41d0-8ece-629dfb5178b0"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:3000/api/v1/places/plc_236aeadd-b75a-4371-a996-011d66c3aa36/reviews",
+      "protocolProfileBehavior": {
+        "disableCookies": false,
+        "followRedirects": true,
+        "maxResponseSize": 52428800,
+        "strictSSL": false
+      },
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"authorName\": \"John Doe\",\r\n  \"rating\": 5,\r\n  \"comment\": \"Great place to study!\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/v1/places/plc_236aeadd-b75a-4371-a996-011d66c3aa36/reviews",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "v1",
+            "places",
+            "plc_236aeadd-b75a-4371-a996-011d66c3aa36",
+            "reviews"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:3000/api/v1/places/plc_236aeadd-b75a-4371-a996-011d66c3aa36/reviews",
+      "protocolProfileBehavior": {
+        "disableCookies": false,
+        "followRedirects": true,
+        "maxResponseSize": 52428800,
+        "strictSSL": false
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"authorName\": \"John Doe\",\r\n  \"rating\": 5,\r\n  \"comment\": \"Great place to study!\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/v1/places/plc_236aeadd-b75a-4371-a996-011d66c3aa36/reviews",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "v1",
+            "places",
+            "plc_236aeadd-b75a-4371-a996-011d66c3aa36",
+            "reviews"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:3000/api/v1/reviews/rev_6fb56af6-3e5c-44dd-8d02-ce02cdba78e7",
+      "protocolProfileBehavior": {
+        "disableCookies": false,
+        "followRedirects": true,
+        "maxResponseSize": 52428800,
+        "strictSSL": false
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"authorName\": \"John Doe\",\r\n  \"rating\": 5,\r\n  \"comment\": \"Great place to study!\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/v1/reviews/rev_6fb56af6-3e5c-44dd-8d02-ce02cdba78e7",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "v1",
+            "reviews",
+            "rev_6fb56af6-3e5c-44dd-8d02-ce02cdba78e7"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:3000/api/v1/reviews/rev_6fb56af6-3e5c-44dd-8d02-ce02cdba78e7",
+      "protocolProfileBehavior": {
+        "disableCookies": false,
+        "followRedirects": true,
+        "maxResponseSize": 52428800,
+        "strictSSL": false
+      },
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"authorName\": \"John Doe\",\r\n  \"rating\": 5,\r\n  \"comment\": \"Great place to study!\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/v1/reviews/rev_6fb56af6-3e5c-44dd-8d02-ce02cdba78e7",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "v1",
+            "reviews",
+            "rev_6fb56af6-3e5c-44dd-8d02-ce02cdba78e7"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:3000/api/v1/reviews/rev_6fb56af6-3e5c-44dd-8d02-ce02cdba78e7",
+      "protocolProfileBehavior": {
+        "disableCookies": false,
+        "followRedirects": true,
+        "maxResponseSize": 52428800,
+        "strictSSL": false
+      },
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"authorName\": \"John\",\r\n  \"rating\": 5,\r\n  \"comment\": \"Great place to study!\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/v1/reviews/rev_6fb56af6-3e5c-44dd-8d02-ce02cdba78e7",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "v1",
+            "reviews",
+            "rev_6fb56af6-3e5c-44dd-8d02-ce02cdba78e7"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

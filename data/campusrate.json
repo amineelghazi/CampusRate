@@ -1,0 +1,129 @@
+{
+  "places": [
+    {
+      "id": "plc_bfadf10d-9640-4cd5-b20e-0c3edf6b5232",
+      "name": "Library",
+      "description": "A place to study and read books",
+      "category": "LIBRARY",
+      "address": "123 Main Street",
+      "services": [
+        "Wi-Fi",
+        "Parking"
+      ],
+      "status": "ACTIVE",
+      "averageRating": null,
+      "reviewCount": 0,
+      "createdAt": "2026-09-23T02:51:19.624Z",
+      "updatedAt": "2026-09-23T02:51:19.624Z"
+    },
+    {
+      "id": "plc_21496ab4-810f-4736-a812-b5168eac79bd",
+      "name": "Library",
+      "description": "A place to study and read books",
+      "category": "LIBRARY",
+      "address": "123 Main Street",
+      "services": [
+        "Wi-Fi",
+        "Parking"
+      ],
+      "status": "ACTIVE",
+      "averageRating": null,
+      "reviewCount": 0,
+      "createdAt": "2026-09-23T02:57:01.223Z",
+      "updatedAt": "2026-09-23T02:57:01.223Z"
+    },
+    {
+      "id": "plc_a4c2d98a-e5aa-4896-a94a-1678d16eebbb",
+      "name": "Library",
+      "description": "A place to study and read books",
+      "category": "LIBRARY",
+      "address": "123 Main Street",
+      "services": [
+        "Wi-Fi",
+        "Parking"
+      ],
+      "status": "ACTIVE",
+      "averageRating": null,
+      "reviewCount": 0,
+      "createdAt": "2026-09-23T02:57:02.983Z",
+      "updatedAt": "2026-09-23T02:57:02.983Z"
+    },
+    {
+      "id": "plc_744b3854-73ea-42cc-8ceb-4f09d6624f30",
+      "name": "Library",
+      "description": "A place to study and read books",
+      "category": "LIBRARY",
+      "address": "123 Main Street",
+      "services": [
+        "Wi-Fi",
+        "Parking"
+      ],
+      "status": "ACTIVE",
+      "averageRating": null,
+      "reviewCount": 0,
+      "createdAt": "2026-09-23T02:57:17.940Z",
+      "updatedAt": "2026-09-23T02:57:17.940Z"
+    },
+    {
+      "id": "plc_236aeadd-b75a-4371-a996-011d66c3aa36",
+      "name": "Library",
+      "description": "A place to study and read books",
+      "category": "LIBRARY",
+      "address": "123 Main Street",
+      "services": [
+        "Wi-Fi",
+        "Parking"
+      ],
+      "status": "ACTIVE",
+      "averageRating": null,
+      "reviewCount": 0,
+      "createdAt": "2026-09-23T02:57:20.399Z",
+      "updatedAt": "2026-09-23T02:57:20.399Z"
+    },
+    {
+      "id": "plc_992f77ac-ee23-45c1-9ccd-881d087a359a",
+      "name": "Library",
+      "description": "A place to study and read books",
+      "category": "LIBRARY",
+      "address": "123 Main Street",
+      "services": [
+        "Wi-Fi",
+        "Parking"
+      ],
+      "status": "ACTIVE",
+      "averageRating": null,
+      "reviewCount": 0,
+      "createdAt": "2026-09-23T03:11:03.149Z",
+      "updatedAt": "2026-09-23T03:11:03.149Z"
+    }
+  ],
+  "reviews": [
+    {
+      "id": "rev_bd63b01a-85ca-45b3-9160-36299d2c0f5c",
+      "placeId": "plc_236aeadd-b75a-4371-a996-011d66c3aa36",
+      "authorName": "John Doe",
+      "rating": 5,
+      "comment": "Great place to study!",
+      "createdAt": "2026-09-23T02:58:07.659Z",
+      "updatedAt": "2026-09-23T02:58:07.659Z"
+    },
+    {
+      "id": "rev_67e3ae35-8089-41af-af01-d5e9fa9d0e29",
+      "placeId": "plc_236aeadd-b75a-4371-a996-011d66c3aa36",
+      "authorName": "John Doe",
+      "rating": 5,
+      "comment": "Great place to study!",
+      "createdAt": "2026-09-23T03:14:34.300Z",
+      "updatedAt": "2026-09-23T03:14:34.300Z"
+    },
+    {
+      "id": "rev_279c939f-2dbc-415a-83f0-a08f78c7138a",
+      "placeId": "plc_236aeadd-b75a-4371-a996-011d66c3aa36",
+      "authorName": "John Doe",
+      "rating": 5,
+      "comment": "Great place to study!",
+      "createdAt": "2026-09-23T03:15:08.029Z",
+      "updatedAt": "2026-09-23T03:15:08.029Z"
+    }
+  ]
+}
