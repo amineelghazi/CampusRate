@@ -11,7 +11,7 @@ export class CreateReviewDto {
   rating: number;
 
   @IsString()
-  @MinLength(3)
-  @MaxLength(300)
+  @MinLength(1)
+  @MaxLength(100)
   comment: string;
 }
