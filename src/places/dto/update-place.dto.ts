@@ -1,23 +1,41 @@
 import { ArrayUnique, IsArray, IsEnum, IsOptional, IsString, MinLength } from 'class-validator';
 import { PlaceCategory } from '../enums/place-category.enum';
 import { PlaceStatus } from '../enums/place-status.enum';
+import { ApiPropertyOptional } from '@nestjs/swagger';
 
 export class UpdatePlaceDto {
-  @IsOptional() @IsString() @MinLength(1)
+  @ApiPropertyOptional({example: 'Library'})
+  @IsOptional()
+  @IsString()
+  @MinLength(1)
   name?: string;
 
-  @IsOptional() @IsString() @MinLength(1)
+  @ApiPropertyOptional({example: 'A place to study and read books'})
+  @IsOptional()
+  @IsString()
+  @MinLength(1)
   description?: string;
 
-  @IsOptional() @IsEnum(PlaceCategory)
+  @ApiPropertyOptional({example: 'LIBRARY'})
+  @IsOptional()
+  @IsEnum(PlaceCategory)
   category?: PlaceCategory;
 
-  @IsOptional() @IsString() @MinLength(1)
+  @ApiPropertyOptional({example: '123 Main Street'})
+  @IsOptional()
+  @IsString()
+  @MinLength(1)
   address?: string;
 
-  @IsOptional() @IsArray() @ArrayUnique() @IsString({ each: true })
+  @ApiPropertyOptional({example: ['Wi-Fi', 'Parking']})
+  @IsOptional()
+  @IsArray()
+  @ArrayUnique()
+  @IsString({ each: true })
   services?: string[];
 
-  @IsOptional() @IsEnum(PlaceStatus)
+  @ApiPropertyOptional({example: 'ACTIVE'})
+  @IsOptional()
+  @IsEnum(PlaceStatus)
   status?: PlaceStatus;
 }
