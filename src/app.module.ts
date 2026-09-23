@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import * as Joi from 'joi';
 import { StorageModule } from './storage/storage.module';
+import { PlacesModule } from './places/places.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { StorageModule } from './storage/storage.module';
       }),
     }),
     StorageModule,
+    PlacesModule,
   ],
 })
 export class AppModule {}
