@@ -8,7 +8,14 @@ import helmet from 'helmet';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  // CORS configuration
+  app.enableCors({
+    origin: ['http://localhost:3000'],
+    methods: ['GET', 'POST', 'PATCH', 'DELETE'],
+  });
+  // helmet security headers
   app.use(helmet());
+  // API url prefix
   app.setGlobalPrefix('api/v1');
   app.useGlobalPipes(
     new ValidationPipe({
