@@ -3,13 +3,19 @@ import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import { ProblemDetailsFilter } from './common/filters/problem-details.filter';
+import helmet from 'helmet';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  app.use(helmet());
   app.setGlobalPrefix('api/v1');
   app.useGlobalPipes(
-    new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true, transform: true }),
+    new ValidationPipe({
+      whitelist: true,
+      forbidNonWhitelisted: true,
+      transform: true,
+    }),
   );
   app.useGlobalFilters(new ProblemDetailsFilter());
 
