@@ -1,14 +1,23 @@
-import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { randomUUID } from 'node:crypto';
 import { JsonStorageService } from '../storage/json-storage.service';
 import { CreatePlaceDto } from './dto/create-place.dto';
 import { QueryPlacesDto } from './dto/query-places.dto';
 import { UpdatePlaceDto } from './dto/update-place.dto';
 import { PlaceStatus } from './enums/place-status.enum';
+import { PlacesRepository } from './places.repository';
+import { ReviewsService } from '../reviews/reviews.service';
 
 @Injectable()
 export class PlacesService {
-  constructor(private readonly storage: JsonStorageService) {}
+  constructor(
+    private readonly repository: PlacesRepository,
+    private readonly reviewsService: ReviewsService,
+  ) {}
 
   private addRating(place: any, reviews: any[]) {
     const placeReviews = reviews.filter((r) => r.placeId === place.id);
@@ -23,7 +32,11 @@ export class PlacesService {
     }
     const average = Math.round((total / placeReviews.length) * 100) / 100;
 
-    return { ...place, averageRating: average, reviewCount: placeReviews.length };
+    return {
+      ...place,
+      averageRating: average,
+      reviewCount: placeReviews.length,
+    };
   }
 
   async create(dto: CreatePlaceDto) {
@@ -55,7 +68,7 @@ export class PlacesService {
     // 1. filter by category
     let places = data.places;
     if (query.category) {
-      places = places.filter((p:any) => p.category === query.category);
+      places = places.filter((p: any) => p.category === query.category);
     }
 
     // 2. paginate
@@ -64,7 +77,9 @@ export class PlacesService {
     const pageOfPlaces = places.slice(start, start + query.limit);
 
     // 3. add the rating to each place
-    const result = pageOfPlaces.map((p:any) => this.addRating(p, data.reviews));
+    const result = pageOfPlaces.map((p: any) =>
+      this.addRating(p, data.reviews),
+    );
 
     return {
       data: result,
@@ -79,7 +94,7 @@ export class PlacesService {
 
   async findOne(id: string) {
     const data = await this.storage.read();
-    const place = data.places.find((p:any) => p.id === id);
+    const place = data.places.find((p: any) => p.id === id);
 
     if (!place) {
       throw new NotFoundException(`Place ${id} not found`);
@@ -89,7 +104,7 @@ export class PlacesService {
 
   async update(id: string, dto: UpdatePlaceDto) {
     const data = await this.storage.read();
-    const index = data.places.findIndex((p:any) => p.id === id);
+    const index = data.places.findIndex((p: any) => p.id === id);
 
     if (index === -1) {
       throw new NotFoundException(`Place ${id} not found`);
@@ -108,15 +123,17 @@ export class PlacesService {
 
   async remove(id: string) {
     const data = await this.storage.read();
-    const index = data.places.findIndex((p:any) => p.id === id);
+    const index = data.places.findIndex((p: any) => p.id === id);
 
     if (index === -1) {
       throw new NotFoundException(`Place ${id} not found`);
     }
 
-    const hasReviews = data.reviews.some((r:any) => r.placeId === id);
+    const hasReviews = data.reviews.some((r: any) => r.placeId === id);
     if (hasReviews) {
-      throw new ConflictException(`Place ${id} has reviews and cannot be deleted`);
+      throw new ConflictException(
+        `Place ${id} has reviews and cannot be deleted`,
+      );
     }
 
     data.places.splice(index, 1);
