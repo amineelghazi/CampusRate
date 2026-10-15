@@ -1,10 +1,16 @@
 import { Module } from '@nestjs/common';
 import { PlacesService } from './places.service';
 import { PlacesController } from './places.controller';
-import { JsonStorageService } from '../storage/json-storage.service';
+import { MongooseModule } from '@nestjs/mongoose';
+import { Place,PlaceSchema } from './schemas/place.schema';
+import { PlacesRepository } from './places.repository';
 
 @Module({
+  imports:[
+    MongooseModule.forFeature([{ name: Place.name  , schema: PlaceSchema}]),
+  ],
   controllers: [PlacesController],
-  providers: [PlacesService,JsonStorageService],
+  providers:[PlacesService, PlacesRepository],
+  // providers: [PlacesService,JsonStorageService],
 })
 export class PlacesModule {}
