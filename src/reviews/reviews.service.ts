@@ -3,50 +3,55 @@ import { randomUUID } from 'node:crypto';
 import { JsonStorageService } from '../storage/json-storage.service';
 import { CreateReviewDto } from './dto/create-review.dto';
 import { UpdateReviewDto } from './dto/update-review.dto';
+import { ReviewsRepository } from './reviews.repository';
+import { PlacesRepository } from '../places/places.repository';
+import { InjectModel } from '@nestjs/mongoose';
+import { Place } from '../places/schemas/place.schema';
+import { Model } from 'mongoose';
+import { stat } from 'node:fs';
 
 @Injectable()
 export class ReviewsService {
-  constructor(private readonly storage: JsonStorageService) {}
+  constructor(
+    private readonly repository: ReviewsRepository,
+    @InjectModel(Place.name) private readonly placeModel: Model<Place>,
+  ) {}
+
+  private async refreshStats(placeId: string) {
+    const stats = await this.repository.getStats(placeId);
+    await this.placeModel
+      .updateOne(
+        { _id: placeId },
+        {
+          averageRating:
+            stats.avg === null ? null : Math.round(stats.avg * 100) / 100,
+          reviewCount: stats.count,
+        },
+      )
+      .exec();
+  }
 
   async create(placeId: string, dto: CreateReviewDto) {
-    const data = await this.storage.read();
-
-    const place = data.places.find((p: any) => p.id === placeId);
+    const place = await this.placeModel.exists({ _id: placeId });
     if (!place) {
       throw new NotFoundException(`Place ${placeId} not found`);
     }
 
-    const now = new Date().toISOString();
-    const newReview = {
-      id: `rev_${randomUUID()}`,
-      placeId,
-      authorName: dto.authorName,
-      rating: dto.rating,
-      comment: dto.comment,
-      createdAt: now,
-      updatedAt: now,
-    };
-
-    data.reviews.push(newReview);
-    await this.storage.write(data);
-    return newReview;
+    const review = await this.repository.create(placeId, dto);
+    await this.refreshStats(placeId);
+    return review;
   }
 
   async findAllForPlace(placeId: string) {
-    const data = await this.storage.read();
-
-    const place = data.places.find((p: any) => p.id === placeId);
+    const place = await this.placeModel.exists({ _id: placeId });
     if (!place) {
       throw new NotFoundException(`Place ${placeId} not found`);
     }
-
-    return data.reviews.filter((r: any) => r.placeId === placeId);
+    return await this.repository.findAllByPlace(placeId);
   }
 
   async findOne(id: string) {
-    const data = await this.storage.read();
-    const review = data.reviews.find((r: any) => r.id === id);
-
+    const review = await this.repository.findById(id);
     if (!review) {
       throw new NotFoundException(`Review ${id} not found`);
     }
@@ -54,32 +59,19 @@ export class ReviewsService {
   }
 
   async update(id: string, dto: UpdateReviewDto) {
-    const data = await this.storage.read();
-    const index = data.reviews.findIndex((r: any) => r.id === id);
-
-    if (index === -1) {
+    const review = await this.repository.update(id, dto);
+    if (!review) {
       throw new NotFoundException(`Review ${id} not found`);
     }
-
-    data.reviews[index] = {
-      ...data.reviews[index],
-      ...dto,
-      updatedAt: new Date().toISOString(),
-    };
-
-    await this.storage.write(data);
-    return data.reviews[index];
+    await this.refreshStats(review.placeId);
+    return review;
   }
 
   async remove(id: string) {
-    const data = await this.storage.read();
-    const index = data.reviews.findIndex((r: any) => r.id === id);
-
-    if (index === -1) {
+    const review = await this.repository.delete(id);
+    if (!review) {
       throw new NotFoundException(`Review ${id} not found`);
     }
-
-    data.reviews.splice(index, 1);
-    await this.storage.write(data);
+    await this.refreshStats(review.placeId);
   }
 }
