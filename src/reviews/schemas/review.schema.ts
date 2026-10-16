@@ -13,7 +13,7 @@ import { Document } from 'mongoose';
   },
 })
 export class Review extends Document {
-  @Prop({ required: true, unique: true })
+  @Prop({ required: true })
   placeId: string;
 
   @Prop({ required: true })
@@ -26,8 +26,8 @@ export class Review extends Document {
   comment: string;
 
   // timestamps s'occupe du createdAt et updatedAt
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export const ReviewSchema = SchemaFactory.createForClass(Review);
