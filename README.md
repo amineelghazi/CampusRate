@@ -35,6 +35,9 @@ Reason why :
 - We can delete a review or edit it on its own, so it's easier if it is it's own document
 - With embedding all of the reviews would be saved directly inside a place & deleting the place would automatically removed the review. However, the place would also be saving  all the reviews and the file would be heavy
 
+# (T1) : https
+
+HTTPS is hypertext transfer protocol secure , its a secure protocol that uses TLS to encrypt data. HTTP is the the unsecured protocol that is mainly used nowadays for testing when the app is not deployed yet. HTTPS blocks malicous actors from listening to our requests and intercepting. For example, if for some reason someone decides to connect to their bank account in a tim hortons network. They will be vulnerable and exposed to others on the same network, because the WIFI is using http protocol
 
 ## Tech stack
 
