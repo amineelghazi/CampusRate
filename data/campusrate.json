@@ -95,6 +95,22 @@
       "reviewCount": 0,
       "createdAt": "2026-09-23T03:11:03.149Z",
       "updatedAt": "2026-09-23T03:11:03.149Z"
+    },
+    {
+      "id": "plc_54e1950e-ea13-484f-89a7-27146b9122ee",
+      "name": "Library",
+      "description": "A place to study and read books",
+      "category": "LIBRARY",
+      "address": "123 Main Street",
+      "services": [
+        "Wi-Fi",
+        "Parking"
+      ],
+      "status": "ACTIVE",
+      "averageRating": null,
+      "reviewCount": 0,
+      "createdAt": "2026-10-14T19:19:01.473Z",
+      "updatedAt": "2026-10-14T19:19:01.473Z"
     }
   ],
   "reviews": [
