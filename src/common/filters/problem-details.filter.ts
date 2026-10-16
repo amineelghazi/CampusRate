@@ -1,4 +1,9 @@
-import { ArgumentsHost, Catch, ExceptionFilter, HttpException } from '@nestjs/common';
+import {
+  ArgumentsHost,
+  Catch,
+  ExceptionFilter,
+  HttpException,
+} from '@nestjs/common';
 import { Request, Response } from 'express';
 
 const types: Record<number, string> = {
@@ -27,25 +32,33 @@ export class ProblemDetailsFilter implements ExceptionFilter {
     if (exception instanceof HttpException) {
       status = exception.getStatus();
       const body: any = exception.getResponse();
-      detail = Array.isArray(body.message) ? body.message.join(', ') : body.message;
+      detail = Array.isArray(body.message)
+        ? body.message.join(', ')
+        : body.message;
     } else if (exception.status === 400) {
       status = 400;
       detail = 'Malformed request body.';
-    } else if (exception.code === 11000){
+    } else if (exception.code === 11000) {
       // MongoDB duplicate key
       status = 409;
-      detail = 'A ressource with the same unique value already exists'
-    } else if (exception.name === 'CastError' || exception.name === 'ValidationError'){
+      detail = 'A ressource with the same unique value already exists';
+    } else if (
+      exception.name === 'CastError' ||
+      exception.name === 'ValidationError'
+    ) {
       status = 400;
       detail = 'Invalid data';
     }
 
-    response.status(status).type('application/problem+json').json({
-      type: types[status] ?? 'about:blank',
-      title: titles[status] ?? 'Error',
-      status: status,
-      detail: detail,
-      instance: request.originalUrl,
-    });
+    response
+      .status(status)
+      .type('application/problem+json')
+      .json({
+        type: types[status] ?? 'about:blank',
+        title: titles[status] ?? 'Error',
+        status: status,
+        detail: detail,
+        instance: request.originalUrl,
+      });
   }
 }
