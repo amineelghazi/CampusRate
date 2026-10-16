@@ -149,8 +149,6 @@ decisions:
 ## Known limitations
 
 - No authentication or authorization; every endpoint is public.
-- No database — data is persisted to a single local JSON file, which is not
-  suited for concurrent writes at scale.
 - No automated test suite; correctness is verified manually via Swagger UI
   and the provided Postman collection.
 - Rating aggregates are recalculated on every read rather than cached, which
