@@ -5,6 +5,7 @@ import {
   HttpException,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
+import { Logger } from '@nestjs/common';
 
 const types: Record<number, string> = {
   400: '/problems/validation-error',
@@ -22,6 +23,8 @@ const titles: Record<number, string> = {
 
 @Catch()
 export class ProblemDetailsFilter implements ExceptionFilter {
+  private readonly logger = new Logger('ErrorFilter');
+
   catch(exception: any, host: ArgumentsHost) {
     const request = host.switchToHttp().getRequest<Request>();
     const response = host.switchToHttp().getResponse<Response>();
@@ -48,6 +51,15 @@ export class ProblemDetailsFilter implements ExceptionFilter {
     ) {
       status = 400;
       detail = 'Invalid data';
+    }
+
+    if (status === 500) {
+      this.logger.error(
+        `${request.method} ${request.originalUrl} -> 500`,
+        exception.stack,
+      );
+    } else {
+      this.logger.warn(`${request.method} ${request.originalUrl} -> ${status}`);
     }
 
     response
