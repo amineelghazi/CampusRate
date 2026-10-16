@@ -25,7 +25,14 @@ versioning, HTTP semantics, validation, and uniform error handling.
 - **M1** : Pertinent index and unique index on `places.name` (handles duplicates with a `409` code).
 - **M2** : MongoDB aggregation (`$match` and `$group`) to calculate review statistics.
 - **M3** : Reference modeling (`placeId`) instead of embedding.
-
+- **H1**: Rate limiting with `@nestjs/throttler`: 20 requests per minute per IP
+- **H4**: Allowed CORS origins are read from `CORS_ORIGINS` in `.env`, so each
+  environment has its own list.
+- **H5**: CORS only allows `GET`, `POST`, `PATCH` and `DELETE`, the methods the
+  API really uses.
+- **T1**: Explanation of HTTPS (see below).
+- **L2**: Errors are logged on the server only (`WARN` for client errors,
+  `ERROR` with the stack for server errors). The client never receives the stack.
 
 # (M3) : reference instead of embedding
 
