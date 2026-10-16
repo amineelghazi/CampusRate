@@ -31,3 +31,6 @@ export class Review extends Document {
 }
 
 export const ReviewSchema = SchemaFactory.createForClass(Review);
+
+// Allows us to find the reviews quickly and it filters them by date
+ReviewSchema.index({ placeId: 1, createdAt: 1})
