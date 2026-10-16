@@ -5,6 +5,8 @@ import * as Joi from 'joi';
 import { PlacesModule } from './places/places.module';
 import { ReviewsModule } from './reviews/reviews.module';
 import databaseConfig from './config/database.config';
+import { APP_GUARD } from '@nestjs/core';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 
 @Module({
   imports: [
@@ -31,8 +33,10 @@ import databaseConfig from './config/database.config';
         autoIndex: process.env.NODE_ENV !== 'production', // Désactive l'auto-indexation en prod pour les performances
       }),
     }),
+    ThrottlerModule.forRoot([{ ttl: 60000, limit: 20 }]), // Applied rate limiting for users
     PlacesModule,
     ReviewsModule,
   ],
+  providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],
 })
 export class AppModule {}
