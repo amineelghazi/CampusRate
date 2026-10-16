@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import {MongooseModule} from '@nestjs/mongoose';
+import { MongooseModule } from '@nestjs/mongoose';
 import * as Joi from 'joi';
 import { PlacesModule } from './places/places.module';
 import { ReviewsModule } from './reviews/reviews.module';
 import databaseConfig from './config/database.config';
-
+import { APP_GUARD } from '@nestjs/core';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import databaseConfig from './config/database.config';
         MONGO_URI: Joi.string().required(),
         PORT: Joi.number().port().required(),
         // DATA_FILE_PATH: Joi.string().required(), we don't need the json file anymore, we use mongo
+        CORS_ORIGINS: Joi.string().default('http://localhost:3000'),
       }),
     }),
     // 2. Connexion asynchrone et sécurisée à MongoDB
@@ -31,8 +33,10 @@ import databaseConfig from './config/database.config';
         autoIndex: process.env.NODE_ENV !== 'production', // Désactive l'auto-indexation en prod pour les performances
       }),
     }),
+    ThrottlerModule.forRoot([{ ttl: 60000, limit: 20 }]), // Applied rate limiting for users
     PlacesModule,
     ReviewsModule,
   ],
+  providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],
 })
 export class AppModule {}
