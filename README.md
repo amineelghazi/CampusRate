@@ -20,12 +20,28 @@ versioning, HTTP semantics, validation, and uniform error handling.
   a server restart
 - Complete OpenAPI/Swagger documentation, browsable without reading the code
 
+## Options Implemented
+
+- **M1** : Pertinent index and unique index on `places.name` (handles duplicates with a `409` code).
+- **M2** : MongoDB aggregation (`$match` and `$group`) to calculate review statistics.
+- **M3** : Reference modeling (`placeId`) instead of embedding.
+
+
+# (M3) : reference instead of embedding
+
+I chose to keep reviews in their own `reviews` collection with a `placeId` that points to the place.I did not put the reviews inside the place document
+
+Reason why :
+- We can delete a review or edit it on its own, so it's easier if it is it's own document
+- With embedding all of the reviews would be saved directly inside a place & deleting the place would automatically removed the review. However, the place would also be saving  all the reviews and the file would be heavy
+
+
 ## Tech stack
 
 - [NestJS](https://nestjs.com/) (TypeScript)
+- [MongoDB](https://www.mongodb.com/) / Mongoose ODM
 - `class-validator` / `class-transformer` for DTO validation
 - `@nestjs/swagger` for OpenAPI documentation
-- JSON file storage via `node:fs/promises` (no database)
 
 ## Installation
 
