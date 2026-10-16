@@ -13,7 +13,7 @@ async function bootstrap() {
   // CORS configuration
   app.enableCors({
     origin: config.get<string>('CORS_ORIGINS','http://localhost:3000').split(',') ,
-    methods: ['GET', 'POST', 'PATCH', 'DELETE'],
+    methods: ['GET', 'POST', 'PATCH', 'DELETE'], // restrictions h5
   });
   // helmet security headers
   app.use(helmet());
