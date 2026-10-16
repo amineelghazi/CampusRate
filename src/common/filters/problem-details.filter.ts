@@ -31,6 +31,13 @@ export class ProblemDetailsFilter implements ExceptionFilter {
     } else if (exception.status === 400) {
       status = 400;
       detail = 'Malformed request body.';
+    } else if (exception.code === 11000){
+      // MongoDB duplicate key
+      status = 409;
+      detail = 'A ressource with the same unique value already exists'
+    } else if (exception.name === 'CastError' || exception.name === 'ValidationError'){
+      status = 400;
+      detail = 'Invalid data';
     }
 
     response.status(status).type('application/problem+json').json({
