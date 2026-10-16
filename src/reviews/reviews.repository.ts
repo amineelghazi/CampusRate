@@ -34,17 +34,12 @@ export class ReviewsRepository {
   }
 
   async getStats(placeId: string) {
-    const reviews = await this.model.find({ placeId }).exec();
-
-    if (reviews.length === 0) {
-      return { avg: null, count: 0 };
-    }
-
-    let total = 0;
-    for (const review of reviews) {
-      total += review.rating;
-    }
-
-    return { avg: total / reviews.length, count: reviews.length };
+    const [stats] = await this.model.aggregate([
+      { $match: { placeId } },
+      { $group: { _id: null, avg: { $avg: '$rating' }, count: { $sum: 1 } } },
+    ]);
+    return stats
+      ? { avg: stats.avg as number, count: stats.count as number }
+      : { avg: null, count: 0 };
   }
 }
