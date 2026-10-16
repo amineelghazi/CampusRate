@@ -2,7 +2,6 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import {MongooseModule} from '@nestjs/mongoose';
 import * as Joi from 'joi';
-import { StorageModule } from './storage/storage.module';
 import { PlacesModule } from './places/places.module';
 import { ReviewsModule } from './reviews/reviews.module';
 import databaseConfig from './config/database.config';
@@ -32,7 +31,6 @@ import databaseConfig from './config/database.config';
         autoIndex: process.env.NODE_ENV !== 'production', // Désactive l'auto-indexation en prod pour les performances
       }),
     }),
-    StorageModule,
     PlacesModule,
     ReviewsModule,
   ],
